@@ -1,0 +1,72 @@
+import { Fragment, useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+const Tabs = () => {
+  const [numero, setNumero] = useState(0);
+
+  const handleClick = (e) => {
+    switch (e.target.dataset.id) {
+      case "+":
+        setNumero((prevState) => prevState + 1); //best practice
+        break;
+      case "-":
+        setNumero(numero - 1); //bad practice
+        break;
+      default:
+        break;
+    }
+  };
+  // Estos deben mostrarse de a uno porque correr varios al mismo tiempo disparará casi
+  // todos los mensajes
+
+  //se ejecuta sólo cuando el componente se monta
+  useEffect(() => {
+    console.log("Se monta el componente");
+  }, []);
+
+  //se ejecuta cada vez que el componente se renderiza
+  // useEffect(() => {
+  //   console.log("Se renderiza el componente");
+  // });
+
+  // //se ejecuta cada vez que el componente se actualiza
+  // useEffect(() => {
+  //   console.log("El componente se actualizó");
+  // }, [numero]);
+
+  //se vuelve a montar cuando actualiza la variable numero **
+  // se ejecuta sólo cuando el componente se desmonta aquello que va tras el return
+  // del useEffect(). *
+
+  // useEffect(() => {
+  //   console.log("Se volvió a montar el componente tras actualización...");
+  //   return () => {
+  //     console.log("Se desmontó el componente"); //* Aquí
+  //   };
+  // }, [numero]); //** Aquí
+
+  return (
+    <Fragment>
+      <h3>My counter: {numero}</h3>
+      <div>
+        <Button
+          className="btn btn-sm btn-success m-1"
+          style={{ width: "2em" }}
+          onClick={handleClick}
+          data-id="+"
+        >
+          +
+        </Button>
+        <Button
+          className="btn btn-sm btn-danger m-1"
+          style={{ width: "2em" }}
+          onClick={handleClick}
+          data-id="-"
+        >
+          -
+        </Button>
+      </div>
+    </Fragment>
+  );
+};
+
+export default Tabs;
