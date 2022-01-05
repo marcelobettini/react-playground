@@ -1,4 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function Hola() {
   const today = new Date();
@@ -8,10 +11,16 @@ function Hola() {
   };
   const { nombre, fecha } = obj;
   return (
-    <Fragment>
-      <p>Hola Mundo, les saluda {nombre}</p>
-      <p>Hoy es {fecha}</p>
-    </Fragment>
+    <Container>
+      <Row>
+        <Col xs={12} className="text-center">
+          <h1>Encabezado</h1>
+          <p>Hola Mundo, les saluda {nombre}</p>
+          <p>Hoy es {fecha}</p>
+          <hr />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
